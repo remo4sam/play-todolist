@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import controllers.Application;
 import org.junit.*;
 
 import play.mvc.*;
@@ -40,5 +41,11 @@ public class ApplicationTest {
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
 
+    @Test
+    public void displayListTest(){
+        Result result = Application.displayList();
+        assertThat(result.toString().contains("Aidah"));
+
+    }
 
 }
