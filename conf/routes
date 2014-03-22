@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET     /showlist                           controllers.Application.displayList()
+
 
 GET     /list                       controllers.Application.displayList()
 

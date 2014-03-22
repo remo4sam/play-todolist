@@ -41,6 +41,12 @@ public class ApplicationTest {
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
 
+    @Test
+    public void displayListTest(){
+        Result result = Application.displayList();
+        assertThat(result.toString().contains("Aidah"));
+
+    }
 
     @Test
     public void shouldTestTheDisplayListMethodContent(){

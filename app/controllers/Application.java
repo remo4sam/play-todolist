@@ -22,4 +22,13 @@ public class Application extends Controller {
 
     }
 
+    public static Result displayList() {
+        Task task = new Task();
+        task.add("Aidah");
+        task.add("Ritah");
+        task.add("timothy");
+        task.add("Gladys");
+        return ok(String.valueOf(task.getList()));
+    }
+
 }
