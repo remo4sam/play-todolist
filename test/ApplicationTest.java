@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import controllers.Application;
 import org.junit.*;
 
 import play.mvc.*;
@@ -39,6 +40,17 @@ public class ApplicationTest {
         assertThat(contentType(html)).isEqualTo("text/html");
         assertThat(contentAsString(html)).contains("Your new application is ready.");
     }
+
+
+    @Test
+    public void shouldTestTheDisplayListMethodContent(){
+
+       Result html1 = Application.displayList();
+        assertThat(contentAsString(html1)).contains("Timothy");
+
+
+    }
+
 
 
 }
