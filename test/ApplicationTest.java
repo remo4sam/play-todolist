@@ -5,8 +5,10 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import controllers.Application;
+import models.Task;
 import org.junit.*;
 
+import play.data.Form;
 import play.mvc.*;
 import play.test.*;
 import play.data.DynamicForm;
@@ -27,7 +29,7 @@ import static org.fest.assertions.Assertions.*;
 *
 */
 public class ApplicationTest {
-
+    Form<Task> taskForm = Form.form(Task.class);
     @Test
     public void simpleCheck() {
         int a = 1 + 1;
@@ -42,21 +44,17 @@ public class ApplicationTest {
     }
 
     @Test
-    public void displayListTest(){
-        Result result = Application.displayList();
-        assertThat(result.toString().contains("Aidah"));
+    public void shouldTestRenderTasks(){
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+            new Task("play music").save();
+            new Task("close laptop").save();
+            List<Task> tasks= Task.find.all();
+            Content html=views.html.listOfNames.render(tasks, taskForm);
 
-    }
-
-    @Test
-    public void shouldTestTheDisplayListMethodContent(){
-
-       Result html1 = Application.displayList();
-        assertThat(contentAsString(html1)).contains("Timothy");
-
-
-    }
-
-
-
+            assertThat(contentType(html)).isEqualTo("text/html");
+            assertThat(contentAsString(html)).contains("play music");
+            assertThat(contentAsString(html)).contains("close laptop");
+                }});
+        }
 }
