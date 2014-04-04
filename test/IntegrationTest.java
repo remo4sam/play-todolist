@@ -34,7 +34,7 @@ public class IntegrationTest {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
                 browser.goTo("http://localhost:3333/tasks");
-                assertThat(browser.pageSource()).contains("task(s)");
+                assertThat(browser.pageSource()).contains("Add a New Task");
 
             }
         });
